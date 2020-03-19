@@ -520,6 +520,11 @@ def Single_prediction_report(results_df, nncomp_df, single_regress, explainer):
                      "weights": weights,
                      "intercept": results_df.intercept.values[0],
                      }
+    #print("intercept : " , results_df.intercept.values[0])
+    #print("weights : ",weights )
+    
+    #print("spreadsheet_data: " , spreadsheet_data)
+    #print("feature_list : ",feature_box )
     with open('CLEAR_prediction_report.html', 'w') as fh:
         fh.write(template.render(template_vars))
 
@@ -537,5 +542,5 @@ def Single_prediction_report(results_df, nncomp_df, single_regress, explainer):
         plt.ylabel('CLEAR Polynomial Regression')
 
     fig.savefig('CLEAR_plot.png', bbox_inches="tight")
-
-    return ()
+    coefs = [results_df.intercept.values[0]] + weights
+    return (coefs)

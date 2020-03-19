@@ -7,7 +7,7 @@ Tkinter is used to provide some checks on the user's inputs. The file
  """
 
 
-def init():
+def init(case_study_input,obs_no):
     global case_study, max_predictors, first_obs, last_obs, num_samples, regression_type, \
         score_type, test_sample, regression_sample_size, \
         CLEAR_path, neighbourhood_algorithm, \
@@ -16,10 +16,10 @@ def init():
         LIME_sample, LIME_kernel, multi_class, multi_class_labels, multi_class_focus,\
         use_prev_sensitivity, use_sklearn, binary_decision_boundary
 
-    case_study = 'BreastC'  # 'Credit Card','PIMA','Census','BreastC','IRIS'
+    case_study = case_study_input  # 'Credit Card','PIMA','Census','BreastC','IRIS'
     max_predictors = 15 # maximum number of dependent variables in stepwise regression
-    first_obs = 1
-    last_obs = 1     # number of observations to analyse in CLEAR test dataset Credit 104, PIMA 115,
+    first_obs = obs_no
+    last_obs = obs_no     # number of observations to analyse in CLEAR test dataset Credit 104, PIMA 115,
     # BreastC 100, IRIS 50,  Census
     num_samples = 50000  # number of observations to generate in Synthetic Dataset. Default 50000
     regression_type = 'multiple'  # 'multiple' 'logistic'
