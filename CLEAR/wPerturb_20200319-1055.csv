@@ -1,2 +1,0 @@
-,observation,multi_class,feature,orgFeatValue,orgAiProb,actPerturbedFeatValue,AiProbWithActPerturbation,estPerturbedFeatValue,errorPerturbation,regProbWithActPerturbation,errorRegProbActPerturb,orgClass
-0,1,N\A,Glucose,1.968133577693623,0.92572420835495,-0.37902628388523424,0.4999999701976776,-0.2634330497687203,0.11559323411651395,0.47847553393047222,0.021524436267205395,1
