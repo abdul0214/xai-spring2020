@@ -18,60 +18,21 @@ def calc_identity(exp1, exp2):
     score = (total-true)/total
     return score*100, true, total
 
-# def calc_separability(x_test, exp_fn):
-#     x_test.drop_duplicates(inplace=True)
-#     exp = exp_fn(x_test)
-#     wrong = 0
-#     for i in range(exp.shape[0]):
-#         for j in range(exp.shape[0]):
-#             if i == j:
-#                 continue
-#             eq = exp[i]==exp[j]
-#             if eq.all():
-#                 wrong = wrong + 1
-#     total = exp.shape[0]
-#     score = 100*abs(wrong)/total**2
-#     return wrong,total,score
-# def calc_separability(x_test, exp_fn):
-#     x_test = np.unique(x_test, axis = 0)
-#     exp = exp_fn(x_test)
-#     wrong = 0
-#     for i in range(exp.shape[0]):
-#         for j in range(exp.shape[0]):
-#             if i == j:
-#                 continue
-#             eq = np.array_equal(exp[i],exp[j])
-#             if eq:
-#                 wrong = wrong + 1
-#     total = exp.shape[0]
-#     score = 100*abs(wrong)/total**2
-#     return wrong,total,total**2,score
-# def calc_separability(x_test, exp_fn):
-#     x_test = np.unique(x_test)
-#     exp = exp_fn(x_test)
-#     wrong = 0
-#     for i in range(exp.shape[0]):
-#         for j in range(exp.shape[0]):
-#             if i == j:
-#                 continue
-#             eq = np.array_equal(exp[i],exp[j])
-#             if eq:
-#                 wrong = wrong + 1
-#     total = exp.shape[0]
-#     score = 100*abs(wrong)/total**2
-#     return wrong,total,total**2,score
-def calc_separability(exp):
-    wrong = 0
+
+def calc_separability(x_test, exp):
+    dissimilar_instances=len(x_test.drop_duplicates())
+    similar_exps = 0
     for i in range(exp.shape[0]):
         for j in range(exp.shape[0]):
             if i == j:
                 continue
             eq = np.array_equal(exp[i],exp[j])
             if eq:
-                wrong = wrong + 1
+                similar_exps += 1
     total = exp.shape[0]
-    score = 100*abs(wrong)/total**2
-    return wrong,total,total**2,score
+    score = (dissimilar_instances-similar_exps)/dissimilar_instances
+    return dissimilar_instances,similar_exps,score*100
+
 
 def calc_stability(exp, labels):
     total = labels.shape[0]
@@ -84,3 +45,22 @@ def calc_stability(exp, labels):
     if error/total > 0.5:
         error = total-error
     return error, total
+
+
+
+
+# def calc_separability(x_test, exp):
+#     #x_test = np.unique(x_test)
+#     dissimilar_instances=len(np.unique(x_test))
+#     print("dissimilar_instances ",dissimilar_instances)
+#     similar_exps = 0
+#     for i in range(exp.shape[0]):
+#         for j in range(exp.shape[0]):
+#             if i == j:
+#                 continue
+#             eq = np.array_equal(exp[i],exp[j])
+#             if eq:
+#                 similar_exps += 1
+#     total = exp.shape[0]
+#     #score = 100*abs(wrong)/total**2
+#     return dissimilar_instances,similar_exps,total**2

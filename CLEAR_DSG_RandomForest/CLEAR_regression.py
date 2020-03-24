@@ -380,8 +380,9 @@ def get_counterfactuals(explainer, boundary_df, X_test_sample, multi_index):
                         s1['distances'] = np.nan
                         s1['observation'] = i
                         explainer.counterf_rows_df = explainer.counterf_rows_df.append(s1, ignore_index=True)
-
-            if not explainer.counterf_rows_df.empty:
+                            
+                            
+            if not explainer.counterf_rows_df.empty and False:
                 explainer.num_counterf = explainer.counterf_rows_df.shape[0]
                 CLEAR_pred_input_func = tf.estimator.inputs.pandas_input_fn(
                     x=explainer.counterf_rows_df.iloc[:, 1:-4],
