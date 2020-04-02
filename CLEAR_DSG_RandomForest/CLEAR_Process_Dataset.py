@@ -100,7 +100,7 @@ def Create_PIMA_Datasets():
 
 def Create_BreastC_Datasets():
     print('Pre-processing \n')
-    df = pd.read_csv(CLEAR_settings.CLEAR_path + 'breast cancer.csv')
+    df = pd.read_csv(CLEAR_settings.CLEAR_path + 'Breast cancer.csv')
     df['diagnosis'].replace('B', 0, inplace=True)
     df['diagnosis'].replace('M', 1, inplace=True)
     for x in df.columns.tolist():
