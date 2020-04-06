@@ -20,6 +20,10 @@ def calc_identity(exp1, exp2):
 
 
 def calc_separability(x_test, exp):
+    import pandas as pd
+    import numpy as np
+    x_test = pd.DataFrame(x_test)
+    exp = np.asarray(exp)
     dissimilar_instances=len(x_test.drop_duplicates())
     similar_exps = 0
     for i in range(exp.shape[0]):
@@ -36,6 +40,9 @@ def calc_separability(x_test, exp):
 
 
 def calc_stability(exp, labels):
+    import numpy as np
+    exp=np.asarray(exp)
+    labels=np.asarray(labels)
     total = labels.shape[0]
     label_values = np.unique(labels)
     n_clusters = label_values.shape[0]
