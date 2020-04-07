@@ -38,6 +38,15 @@ def calc_separability(x_test, exp):
     return dissimilar_instances,similar_exps,score*100
 
 
+def calc_compactness(exps):
+    import pandas as pd
+    import numpy as np
+    exps = np.asarray(exps)
+    scores=[]
+    for exp in exps:
+        scores.append((len(exp)-np.count_nonzero(exp))/len(exp))
+    return (np.average(scores))
+
 
 def calc_stability(exp, labels):
     import numpy as np
