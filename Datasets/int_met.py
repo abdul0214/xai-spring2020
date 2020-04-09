@@ -9,28 +9,6 @@ import sklearn.cluster
 #     score = (total-true)/total
 #     return score*100
 
-def calc_similarity(coefs1,X_test):
-    from sklearn.preprocessing import normalize
-    from sklearn.cluster import DBSCAN
-    from sklearn.metrics.pairwise import euclidean_distances
-    from sklearn import preprocessing 
-    import numpy as np
-    X_test = preprocessing.normalize(X_test, norm='l2')
-    coefs1 = preprocessing.normalize(coefs1, norm='l2')
-    clustering = DBSCAN(eps=0.02,min_samples=2).fit(X_test)
-    cluster_labels = clustering.labels_
-    unique_labels=np.unique(cluster_labels)
-    mean_distances=[]
-    for cluster in unique_labels:
-        indexes_of_cluster=np.where(cluster_labels == cluster)[0]
-        exps_of_cluster = [coefs1[i] for i in indexes_of_cluster] 
-        mean_distances.append(np.average(euclidean_distances(exps_of_cluster)))
-        
-    return np.average(mean_distances)
-
-
-
-
 def calc_identity(exp1, exp2):
     # dis = np.array(exp1)==np.array(exp2)
     # dis = dis.all(axis = 1)
