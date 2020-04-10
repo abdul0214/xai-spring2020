@@ -28,7 +28,23 @@ def calc_similarity(coefs1,X_test):
         
     return np.average(mean_distances)
 
-
+def calc_correctness(exps, labels, true_labels) :
+    incorrect = 0
+    import numpy as np
+    exps=np.asarray(exps)
+    labels=np.asarray(labels)
+    total = labels.shape[0]
+    label_values = np.unique(labels)
+    unique_exps = np.unique(exps, axis=0)
+    correct_exps = exps[(np.where(y1==y_test)[0])]
+    unique_exps = np.unique(correct_exps, axis=0)
+    similar_exps = [] 
+    for exp in unique_exps:
+        indexes_of_exp = np.where((exps == exp).all(axis=1))[0]
+        for j in indexes_of_exp:
+            if (labels[j] != labels[indexes_of_exp[0]]):
+                incorrect += 1
+    return (len(unique_exps)-incorrect)/(len(unique_exps))
 
 
 def calc_identity(exp1, exp2):
@@ -85,7 +101,36 @@ def calc_stability(exp, labels):
         error = total-error
     return error, total
 
+def calc_stability(exp, labels):
+    import numpy as np
+    exp=np.asarray(exp)
+    labels=np.asarray(labels)
+    total = labels.shape[0]
+    label_values = np.unique(labels)
+    n_clusters = label_values.shape[0]
+    init = np.array([[np.average(exp[np.where(labels == i)], axis = 0)] for i in label_values]).squeeze()
+    ct = sklearn.cluster.KMeans(n_clusters = n_clusters, n_jobs=5, random_state=1, n_init=10, init = init)
+    ct.fit(exp)
+    error = np.sum(np.abs(labels-ct.labels_))
+    if error/total > 0.5:
+        error = total-error
+    return error, total
 
+def calc_correctness(exp, labels):
+    import numpy as np
+    exp=np.asarray(exp)
+    labels=np.asarray(labels)
+    total = labels.shape[0]
+    label_values = np.unique(labels)
+    uniqu
+    n_clusters = label_values.shape[0]
+    init = np.array([[np.average(exp[np.where(labels == i)], axis = 0)] for i in label_values]).squeeze()
+    ct = sklearn.cluster.KMeans(n_clusters = n_clusters, n_jobs=5, random_state=1, n_init=10, init = init)
+    ct.fit(exp)
+    error = np.sum(np.abs(labels-ct.labels_))
+    if error/total > 0.5:
+        error = total-error
+    return error, total
 
 
 
